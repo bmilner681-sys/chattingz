@@ -81,8 +81,23 @@ body {
 
 #messages li {
   margin-bottom: 10px;
+  display: flex;
+  align-items: center;
 }
 
+#messages .avatar {
+  width: 35px;
+  height: 35px;
+  background-color: #7289DA;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+/* Message input */
 #chat-form {
   display: flex;
   padding-top: 10px;
@@ -107,25 +122,32 @@ button {
   cursor: pointer;
 }
 
-/* User Panel */
+/* User panel */
 #user-panel {
   width: 200px;
   background-color: #2F3136;
   padding: 10px;
 }
 
-.user-info {
-  display: flex;
-  align-items: center;
+#online-users {
+  list-style: none;
+  padding: 0;
 }
 
-.avatar {
-  width: 35px;
-  height: 35px;
+#online-users li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+#online-users li .avatar {
+  width: 25px;
+  height: 25px;
   background-color: #7289DA;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-right: 10px;
+  margin-right: 5px;
+  font-size: 12px;
 }

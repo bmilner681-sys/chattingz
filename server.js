@@ -1,3 +1,13 @@
+// Get current user
+app.get('/me', async (req, res) => {
+  if (!req.session.userId) return res.json({ loggedIn: false });
+  const user = await User.findById(req.session.userId);
+  res.json({
+    loggedIn: true,
+    username: user.username,
+    avatar: user.avatar || 'U'
+  });
+});
 const express = require('express');
 const http = require('http');
 const { Server } = require('socket.io');
@@ -68,5 +78,21 @@ app.post('/login', async (req, res) => {
   if (!valid) return res.status(400).send('Incorrect password');
   req.session.userId = user._id;
   res.send('Logged in!');
+});
+let onlineUsers = {};
+
+io.on('connection', async (socket) => {
+  const session = socket.request.session;
+  if (!session || !session.userId) return socket.disconnect();
+
+  const user = await User.findById(session.userId);
+  onlineUsers[user.username] = user.avatar || 'U';
+
+  io.emit('online users', onlineUsers);
+
+  socket.on('disconnect', () => {
+    delete onlineUsers[user.username];
+    io.emit('online users', onlineUsers);
+  });
 });
 

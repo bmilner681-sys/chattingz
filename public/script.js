@@ -40,3 +40,27 @@ document.getElementById('login-btn').addEventListener('click', async () => {
   const text = await res.text();
   alert(text);
 });
+const authDiv = document.getElementById('auth');
+const chatDiv = document.getElementById('chat-container');
+const logoutBtn = document.getElementById('logout-btn');
+
+// Check if user is logged in on page load
+async function checkLogin() {
+  const res = await fetch('/me');
+  const data = await res.json();
+  if (data.loggedIn) {
+    authDiv.style.display = 'none';
+    chatDiv.style.display = 'block';
+    username = data.username;
+    avatar = data.avatar;
+  }
+}
+checkLogin();
+
+// Logout button
+logoutBtn.addEventListener('click', async () => {
+  await fetch('/logout', { method: 'POST' });
+  authDiv.style.display = 'block';
+  chatDiv.style.display = 'none';
+  messages.innerHTML = '';
+});
