@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Chattingz</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Sidebar -->
+    <div id="sidebar">
+      <div class="server-icon">C</div>
+      <div class="server-icon">A</div>
+    </div>
+
+    <!-- Channels -->
+    <div id="channels">
+      <h3>#general</h3>
+      <ul>
+        <li>#general-chat</li>
+        <li>#random</li>
+      </ul>
+    </div>
+
+    <!-- Chat area -->
+    <div id="chat-area">
+      <ul id="messages"></ul>
+      <form id="chat-form">
+        <input id="message-input" autocomplete="off" placeholder="Message #general-chat" />
+        <button>Send</button>
+      </form>
+    </div>
+
+    <!-- User panel -->
+    <div id="user-panel">
+      <div class="user-info">
+        <div class="avatar">U</div>
+        <span>Username</span>
+      </div>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
